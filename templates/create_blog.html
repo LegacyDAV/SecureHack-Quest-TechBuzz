@@ -99,22 +99,7 @@
       alert("Title, Description and Content are required.");
       return false;
     }
-
-    if (image_url && !is_valid_url(image_url)) {
-      alert("Please enter a valid url for the image.");
-      return false;
-    }
-
     return true;
-  }
-
-  function is_valid_url(image_url) {
-    try {
-      new URL(url);
-      return true;
-    } catch(e) {
-      return false;
-    }
   }
 
   function create_blog(e) {
@@ -161,7 +146,8 @@
 </script>
 <script>
   document.getElementById("content").addEventListener("input", function () {
-    document.querySelector(".preview-content").innerHTML = this.value;
+    const sanitizedContent = DOMPurify.sanitize(this.value);
+    document.querySelector(".preview-content").innerHTML = sanitizedContent;
   });
 </script>
 {% endblock %}
