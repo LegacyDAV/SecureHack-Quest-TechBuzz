@@ -94,6 +94,29 @@
 </section>
 
 <script>
+  function validate_form(title, short_desc, content, image_url) {
+    if (!title || !short_desc || !content) {
+      alert("Title, Description and Content are required.");
+      return false;
+    }
+
+    if (image_url && !is_valid_url(image_url)) {
+      alert("Please enter a valid url for the image.");
+      return false;
+    }
+
+    return true;
+  }
+
+  function is_valid_url(image_url) {
+    try {
+      new URL(url);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+
   function create_blog(e) {
     e.preventDefault();
     const title = document.getElementById("title").value;
@@ -101,6 +124,10 @@
     const content = document.getElementById("content").value;
     const image_url = document.getElementById("image_url").value;
     const create_blog_btn = document.getElementById("create_blog_btn");
+
+    if (!validate_form(title, short_desc, content, image_url)) {
+      return;
+    }
     
     create_blog_btn.disabled = true;
 
