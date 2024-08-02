@@ -62,7 +62,6 @@
           .then((data) => {
             if (data.success === true) {
               alert("Login Successful");
-              window.location.href = "/";
               window.localStorage.setItem("user_password", password);
               window.localStorage.setItem("user_isloggedin", "true");
               window.localStorage.setItem("user_email", email);
@@ -70,6 +69,7 @@
               user_name = data.user_data[1]
               window.localStorage.setItem("user_uuid", user_uuid);
               window.localStorage.setItem("user_name", user_name);
+              window.location.href = "/";
               
               // window.localStorage.setItem("email",]);
             } else {
